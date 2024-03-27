@@ -1,13 +1,9 @@
-.App {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
+
 
 .buttons {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    margin-left: 40px;
     gap: 5px;
 }
