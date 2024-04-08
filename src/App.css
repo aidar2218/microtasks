@@ -1,4 +1,6 @@
-
+.App {
+    margin: 30px;
+}
 
 .buttons {
     display: flex;

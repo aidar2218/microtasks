@@ -1,52 +1,34 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Money} from "./components/Money";
-
-
-export type BanksType = "all" | "RUBLS" | "Dollars"
-
-export type MoneyType = {
-    banknots: BanksType
-    value: number
-    number: string
-}
+import {Input} from "./components/Input";
+import {Button} from "./components/Button";
 
 function App() {
+    const [messages, setMessages] = useState([
+            {message: 'message1'},
+            {message: 'message2'},
+            {message: 'message3'},
+            {message: 'message4'},
+            {message: 'message5'}
+        ]
+    );
 
-    const [money, setMoney] = useState<MoneyType[]>([
-        { banknots: 'Dollars', value: 100, number: ' a1234567890' },
-        { banknots: 'Dollars', value: 50, number: ' z1234567890' },
-        { banknots: 'RUBLS', value: 100, number: ' w1234567890' },
-        { banknots: 'Dollars', value: 100, number: ' e1234567890' },
-        { banknots: 'Dollars', value: 50, number: ' c1234567890' },
-        { banknots: 'RUBLS', value: 100, number: ' r1234567890' },
-        { banknots: 'Dollars', value: 50, number: ' x1234567890' },
-        { banknots: 'RUBLS', value: 50, number: ' v1234567890' },
-    ])
+    const [title, setTitle] = useState('');
 
-    const [banks, setBanks] = useState<BanksType>("all")
-
-    let currentMoney = money;
-
-    if (banks === "RUBLS") {
-        currentMoney = money.filter(m => m.banknots === "RUBLS");
+    const addMessage = (messageValue: string) => {
+        setMessages([{message: messageValue}, ...messages]);
+        setTitle("");
     }
-    if (banks === "Dollars") {
-        currentMoney = money.filter(m => m.banknots === "Dollars");
-    }
-
-
-    const onClickHandler = (banknot: BanksType) => {
-
-        setBanks(banknot);
-
-        console.log(banknot)
-    }
-
 
     return (
-        <div className={"App"}>
-            <Money money={currentMoney} filterMoney={onClickHandler}/>
+        <div className="App">
+            <Input title={title} setTitle={setTitle}/>
+            <Button name={"Add"} callback={() => addMessage(title)} />
+            {messages.map((el, index) => {
+                return (
+                    <div key={index}>{el.message}</div>
+                )
+            })}
         </div>
     );
 }
